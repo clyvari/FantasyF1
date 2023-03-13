@@ -82,6 +82,10 @@ class Calculator
         sw.Stop();
         System.Console.WriteLine($"Generated {drv_tm.Count} states in {sw.Elapsed}");
         sw.Restart();
+        if(drv_tm.Distinct().Count() != drv_tm.Count()) throw new Exception("Duplicates !!");
+        sw.Stop();
+        System.Console.WriteLine($"Checked for duplicates in {sw.Elapsed}");
+        sw.Restart();
         StatesDb = MapBitsToTeams(drv_tm);
         sw.Stop();
         System.Console.WriteLine($"Converted states to Teams in {sw.Elapsed}");
