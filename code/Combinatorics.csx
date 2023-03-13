@@ -23,11 +23,11 @@ public static class Combinatorics
     {
         var res = new List<uint>();
         var config = Enumerable.Range(0, drawnItems).Reverse().ToArray();
-        var notDone = true;
-        while (notDone)
+        var done = false;
+        while (!done)
         {
             uint data = 0;
-            int packIndex = -1;
+            int incrementIndex = -1;
             var hasIncremented = false;
             for(var i = 0; i < config.Length; i++)
             {
@@ -38,16 +38,16 @@ public static class Combinatorics
                     {
                         config[i]++;
                         hasIncremented = true;
-                        packIndex = i;
+                        incrementIndex = i;
                     }
                 }
             }
-            for(var i = 0; i < packIndex; i++)
+            for(var i = 0; i < incrementIndex; i++)
             {
-                config[i] = config[packIndex]+packIndex-i;
+                config[i] = config[incrementIndex]+incrementIndex-i;
             }
             res.Add(data);
-            if(!hasIncremented) notDone = false;
+            if(!hasIncremented) done = true;
         }
         return res;
     }
